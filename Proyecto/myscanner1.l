@@ -43,16 +43,16 @@ int linea;
 
 "/*"([^*]|\*+[^*/])*\*+"/"    		        return COMMENT;
 "//".*$                  		        return COMMENT;
-0[xX][a-fA-F0-9]+(u|U|l|L)*?	     		return CONSTANT; 
-0[0-9]+(u|U|l|L)*?		     		return CONSTANT; 
-[0-9]+(u|U|l|L)*?		     		return CONSTANT; 
-L?'(\\.|[^\\'])+'	             		return CONSTANT; 
-[0-9]+[Ee][+-]?[0-9]+(f|F|l|L)?		 	return CONSTANT; 
-[0-9]*"."[0-9]+([Ee][+-]?[0-9]+)?(f|F|l|L)?	return CONSTANT; 
-[0-9]+"."[0-9]*([Ee][+-]?[0-9]+)?(f|F|l|L)?	return CONSTANT; 
+0[xX][a-fA-F0-9]+(u|U|l|L)*?	     		return CONSTANT;
+0[0-9]+(u|U|l|L)*?		     		return CONSTANT;
+[0-9]+(u|U|l|L)*?		     		return CONSTANT;
+L?'(\\.|[^\\'])+'	             		return CONSTANT;
+[0-9]+[Ee][+-]?[0-9]+(f|F|l|L)?		 	return CONSTANT;
+[0-9]*"."[0-9]+([Ee][+-]?[0-9]+)?(f|F|l|L)?	return CONSTANT;
+[0-9]+"."[0-9]*([Ee][+-]?[0-9]+)?(f|F|l|L)?	return CONSTANT;
 
-"{"                       return PUNTUACTOR;
-"}"                       return PUNTUACTOR;
+""                       return PUNTUACTOR;
+""                       return PUNTUACTOR;
 ","                       return PUNTUACTOR;
 "("                       return PUNTUACTOR;
 ")"                       return PUNTUACTOR;
@@ -64,7 +64,7 @@ L?'(\\.|[^\\'])+'	             		return CONSTANT;
 "~"                       return OPERATOR;
 "?"                       return OPERATOR;
 "^"                       return OPERATOR;
-"+"			              return OPERATOR;	
+"+"			              return OPERATOR;
 "-"			              return OPERATOR;
 "/"			              return OPERATOR;
 "%"			              return OPERATOR;
@@ -76,27 +76,20 @@ L?'(\\.|[^\\'])+'	             		return CONSTANT;
 ">"			              return OPERATOR;
 "<="			          return OPERATOR;
 "!="			          return OPERATOR;
-"="			              return OPERATOR;
 "+="			          return OPERATOR;
 "-="			          return OPERATOR;
 "*="			          return OPERATOR;
 "/="			          return OPERATOR;
 "%="			          return OPERATOR;
-"!="			          return OPERATOR;
 "."			              return OPERATOR;
-"&"			              return OPERATOR;	
+"&"			              return OPERATOR;
 "|"			              return OPERATOR;
 "->"			          return OPERATOR;
 "&&"			          return OPERATOR;
-"||"			          return OPERATOR;	
+"||"			          return OPERATOR;
 "..."			          return OPERATOR;
 ">>="			          return OPERATOR;
 "<<="			          return OPERATOR;
-"+="			          return OPERATOR;
-"-="			          return OPERATOR;
-"*="			          return OPERATOR;
-"/="			          return OPERATOR;
-"%="			          return OPERATOR;
 "&="			          return OPERATOR;
 "^="			          return OPERATOR;
 "|="			          return OPERATOR;
@@ -116,11 +109,8 @@ L?\'(\\.|[^\\"]|\n)*\'         return LITERAL;
 
 
 
-[ \t\n\r\f]|\n                 	   return ENDLINE;
+[ \t\n\r\f]                 	   return ENDLINE;
 
-                  
-[ \t\n]
-			  ;
 .|[0-9]*[a-zA-Z][_a-zA-Z0-9]*   yyerror("Error léxico con \"%s\", en línea %i.\n",yytext,linea);
 
 
@@ -130,6 +120,3 @@ int yywrap(void)
 {
     return 1;
 }
-
-
-
