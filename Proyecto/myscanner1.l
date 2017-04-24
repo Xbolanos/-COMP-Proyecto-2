@@ -51,8 +51,7 @@ L?'(\\.|[^\\'])+'	             		return CONSTANT;
 [0-9]*"."[0-9]+([Ee][+-]?[0-9]+)?(f|F|l|L)?	return CONSTANT;
 [0-9]+"."[0-9]*([Ee][+-]?[0-9]+)?(f|F|l|L)?	return CONSTANT;
 
-""                       return PUNTUACTOR;
-""                       return PUNTUACTOR;
+
 ","                       return PUNTUACTOR;
 "("                       return PUNTUACTOR;
 ")"                       return PUNTUACTOR;
@@ -109,7 +108,7 @@ L?\'(\\.|[^\\"]|\n)*\'         return LITERAL;
 
 
 
-[ \t\n\r\f]                 	   return ENDLINE;
+\n                 	   return ENDLINE;
 
 .|[0-9]*[a-zA-Z][_a-zA-Z0-9]*   yyerror("Error léxico con \"%s\", en línea %i.\n",yytext,linea);
 
