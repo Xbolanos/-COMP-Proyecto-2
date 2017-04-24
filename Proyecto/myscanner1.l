@@ -11,7 +11,7 @@ int linea;
 "case"			  return KEYWORD;
 "char"			  return KEYWORD;
 "const"			  return KEYWORD;
-"continue"	          return KEYWORD;
+"continue"	      return KEYWORD;
 "default"		  return KEYWORD;
 "do"			  return KEYWORD;
 "double"		  return KEYWORD;
@@ -42,16 +42,18 @@ int linea;
 [0-9][0-9]*		  return INTEGER;
 
 "/*"([^*]|\*+[^*/])*\*+"/"    		        return COMMENT;
-"//".*$                  		        return COMMENT;
+"//".*$                  		        	return COMMENT;
 0[xX][a-fA-F0-9]+(u|U|l|L)*?	     		return CONSTANT;
-0[0-9]+(u|U|l|L)*?		     		return CONSTANT;
-[0-9]+(u|U|l|L)*?		     		return CONSTANT;
-L?'(\\.|[^\\'])+'	             		return CONSTANT;
-[0-9]+[Ee][+-]?[0-9]+(f|F|l|L)?		 	return CONSTANT;
+0[0-9]+(u|U|l|L)*?		     				return CONSTANT;
+[0-9]+(u|U|l|L)*?		     				return CONSTANT;
+L?'(\\.|[^\\'])+'	             			return CONSTANT;
+[0-9]+[Ee][+-]?[0-9]+(f|F|l|L)?		 		return CONSTANT;
 [0-9]*"."[0-9]+([Ee][+-]?[0-9]+)?(f|F|l|L)?	return CONSTANT;
 [0-9]+"."[0-9]*([Ee][+-]?[0-9]+)?(f|F|l|L)?	return CONSTANT;
 
 
+"{"                       return PUNTUACTOR;
+"}"                       return PUNTUACTOR;
 ","                       return PUNTUACTOR;
 "("                       return PUNTUACTOR;
 ")"                       return PUNTUACTOR;
@@ -95,20 +97,22 @@ L?'(\\.|[^\\'])+'	             		return CONSTANT;
 ">>"			          return OPERATOR;
 "<<"			          return OPERATOR;
 
-"#include"			  return INCLUDE;
-"#define"			  return DEFINE;
+"#include"			  	  return INCLUDE;
+"#define"			  	  return DEFINE;
 
 
 
 
 [a-zA-Z][_a-zA-Z0-9]*	          return IDENTIFIER;
 
-L?\"(\\.|[^\\"]|\n)*\"         return LITERAL;
-L?\'(\\.|[^\\"]|\n)*\'         return LITERAL;
+L?\"(\\.|[^\\"]|\n)*\"         	  return LITERAL;
+L?\'(\\.|[^\\"]|\n)*\'        	  return LITERAL;
 
 
+\n|\z|\s		 						return ENDLINE;
+        	                 	  
 
-\n                 	   return ENDLINE;
+[ \t\n]
 
 .|[0-9]*[a-zA-Z][_a-zA-Z0-9]*   yyerror("Error léxico con \"%s\", en línea %i.\n",yytext,linea);
 

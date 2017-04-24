@@ -55,43 +55,39 @@ int scanner(void)
 
 
 int preprocesador1(FILE* archivoActual,FILE* archivoTemporal){	
-    printf("Soy un rebelde\n");
+    
     char *concatenar;
     int ntoken, vtoken;
-    printf("Me voy a enciclar\n");
+    
     ntoken = nextToken();
-    printf("No me encicle\n");
-    printf("%s\n", yytext);
+
+   
     while(ntoken) {
-        printf("Entra al ciclo\n");
+        
     	if(ntoken==INCLUDE){
-            printf("Entra include\n");
+           
     		include(archivoActual,archivoTemporal);
-             printf("Sale include\n");
-    	}
+     	}
     	else if (ntoken==DEFINE){
     		define(ntoken);
-    		printf("SALE DEFINE\n");
+    		
 
     	}
     	else if (ntoken==IDENTIFIER && existeDefine(yytext)!=-1){
-    		printf("Sustituye\n");
-    		printf("%s\n", defines[existeDefine(yytext)].vDefine);
+    		
     		fputs(defines[existeDefine(yytext)].vDefine, archivoTemporal);
     		fputs(" ", archivoTemporal);
 
     	}
     	
     	else if(ntoken != COMMENT){
-    		fprintf("Entro con:%s\n",yytext);
-    	    printf("%d\n", ntoken);
-    	    printf("%s\n", yytext);
+    	
         	fputs(yytext, archivoTemporal);
         	fputs(" ", archivoTemporal);
     	}
-    	printf("INICIA\n");
+    	
         ntoken = nextToken();
-        printf("TERMINA\n");
+   
 	   
     }
     return 0;
@@ -247,7 +243,7 @@ char* constantfolding(char* num, char* operator, char* num2){
 	}
 	char *rfinal = (char*) malloc(sizeof(result));
     rfinal[0] = '\0';
-    printf("Esta es la suma: %d\n", result);
+   
 	sprintf(rfinal,"%d",result);
 	return rfinal;
 
@@ -259,26 +255,29 @@ int define(int ntoken){
 	int position=0;
 	char *variable="";
 	
-	while(ntoken){
+	while(ntoken!=ENDLINE){
+		printf("Estoy en el define con:%s\n",yytext);
 		if(strcmp(variable,"")==0 && ntoken==IDENTIFIER){
-			printf("%s\n", yytext);
+			printf("Variable:%s\n",yytext);
 			variable=(char*)malloc(strlen(yytext));
 			strcpy(variable,yytext);
 
 		}
 		else if(ntoken==INTEGER && strcmp(variable,"")!= 0 ){
-			printf("%s\n", yytext);
+			printf("Valor1:%s\n",yytext);
 			char *value= (char*) malloc(strlen(yytext));
 			strcpy(value,yytext);
 			
 			ntoken=nextToken();
 			if (ntoken==OPERATOR){
+				printf("Valor2:%s\n",yytext);
 				char* operator=(char*)malloc(strlen(yytext));
 				identifiers=(char*)realloc(identifiers, strlen(operator)+1);
                 strcpy(operator,yytext);
 				
 				ntoken=nextToken();
 				if(ntoken==INTEGER){;
+					printf("Valor3:%s\n",yytext);
 					char* tmpnum=constantfolding(value,operator,yytext);
 					identifiers=(char*)realloc(identifiers, strlen(tmpnum)+1);
 					strcat(identifiers, tmpnum);
@@ -286,6 +285,7 @@ int define(int ntoken){
 
 				}else{
 					identifiers=(char*)realloc(identifiers, strlen(yytext)+1);
+					printf("Valor4:%s\n",yytext);
                     strcat(identifiers, value);
                     strcat(identifiers, " ");
                     strcat(identifiers, operator);
@@ -296,22 +296,23 @@ int define(int ntoken){
 
 				}
 			}else{
-				printf("Esta aqui\n");
-                printf("Para ver el string %s\n", yytext);
+				if(strcmp(yytext,"\n")==0){
+					printf("Problema\n");
+				}
+				printf("Valor5:%s\n",yytext);
 				identifiers=(char*)realloc(identifiers, strlen(value)+strlen(yytext)+2);
-				printf("JA NO ME CAI\n");
 				strcat(identifiers, value);
 				strcat(identifiers, " ");
 				strcat(identifiers, yytext);
 				strcat(identifiers, " ");
-				printf("Sale strcat\n");
 		  		position++;
 
 			}
 		}
 		else if(strcmp(variable,"")==1 &&existeDefine(yytext)!=-1){
+
 			char* tmp;
-			printf("Sustituye define\n");
+		
 			tmp=(char*)malloc(strlen(defines[existeDefine(yytext)].vDefine));
 			strcpy(tmp,defines[existeDefine(yytext)].vDefine);
 			identifiers=(char*)realloc(identifiers, strlen(tmp)+1);
@@ -319,44 +320,41 @@ int define(int ntoken){
 			strcat(identifiers, " ");
 
 		}
-		else if (ntoken==ENDLINE){
-			printf("SOy un salto de linea");
-			break;
-		}
-
+	
 
 		
 		else if(strcmp(variable,"")!=0){
-		  printf("Agrega token\n");
-          printf("Tamano: %d y identificador: %s\n", strlen(yytext)+1, yytext);
+		  printf("Valor6:%s\n",yytext);
           char* temp;
 		  temp=(char*)realloc(identifiers, strlen(yytext)+1);
           if(temp)
             identifiers = temp;
             else
                 printf("Mal puntero %p\n", temp);
-          printf("Puntero que fallaa %p\n", identifiers);
+         
 		  strcat(identifiers, yytext);
 		  strcat(identifiers, " ");
 		  position++;
 		}
 
-		
-        ntoken=nextToken();
+		if(strcmp(yytext,"\n")!=0){
+		   ntoken=nextToken();
+		}else{
+			printf("Se supone que sale\n");
+		}
+        
 
     }
     
-	
+	printf("Sale\n");
 
     defines[numDefines].palabra = (char*)malloc(strlen(variable));
     defines[numDefines].vDefine = (char*)malloc(strlen(identifiers));
     strcpy(defines[numDefines].palabra ,variable);
-    printf("%s\n", defines[numDefines].palabra );
     strcpy(defines[numDefines].vDefine,identifiers);
-    printf("%s\n", defines[numDefines].vDefine);
+
     numDefines++;
-    printf("%d\n",numDefines);
-    printf("Salio Ultimo\n");
+
 	return 0;
 
 }
@@ -415,7 +413,7 @@ int main(int argc, char *argv[])
 
         //scanner();
 		if(tmpfile!=NULL){
-			printf("Entra al diferente de null\n");
+		
             //scanner();
             preprocesador1(archivoEntrada,tmpfile); //Se llama a la función del preprocesador con el archivo de entrada
         
