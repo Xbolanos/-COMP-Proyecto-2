@@ -26,6 +26,7 @@ int numIncludes = -1;      //Contador de los includes que se tendrán en el arra
 int numDefines = 0;       //Contador de los defines que se tendrán en el array de structs defines
 bool error  = false;       //Booleano que indica cuando se encuentra un error en el programa
 bool preproceso = false;
+FILE *archivotmp;
 /*****************************************************/
 
 
@@ -43,10 +44,11 @@ int scanner(void)
 {
     int ntoken, vtoken;
     ntoken = nextToken();
-    printf("%d\n",yyleng);
+
     while(ntoken) {
-    	printf("%d\n", ntoken);
-    	printf("%s\n", yytext);
+ 		if(ntoken==ENDLINE){
+ 			linea++;
+ 		}
         ntoken = nextToken();
 	   
     }
@@ -250,7 +252,7 @@ char* constantfolding(char* num, char* operator, char* num2){
 }
 
 int define(int ntoken){
-	char* identifiers=NULL;
+	char* identifiers[50000];
 	ntoken=nextToken();
 	int position=0;
 	char *variable="";
@@ -272,19 +274,19 @@ int define(int ntoken){
 			if (ntoken==OPERATOR){
 				printf("Valor2:%s\n",yytext);
 				char* operator=(char*)malloc(strlen(yytext));
-				identifiers=(char*)realloc(identifiers, strlen(operator)+1);
+				//identifiers=(char*)realloc(identifiers, strlen(operator)+1);
                 strcpy(operator,yytext);
 				
 				ntoken=nextToken();
 				if(ntoken==INTEGER){;
 					printf("Valor3:%s\n",yytext);
 					char* tmpnum=constantfolding(value,operator,yytext);
-					identifiers=(char*)realloc(identifiers, strlen(tmpnum)+1);
+					//identifiers=(char*)realloc(identifiers, strlen(tmpnum)+1);
 					strcat(identifiers, tmpnum);
 					strcat(identifiers, " ");
 
 				}else{
-					identifiers=(char*)realloc(identifiers, strlen(yytext)+1);
+					//identifiers=(char*)realloc(identifiers, strlen(yytext)+1);
 					printf("Valor4:%s\n",yytext);
                     strcat(identifiers, value);
                     strcat(identifiers, " ");
@@ -300,7 +302,7 @@ int define(int ntoken){
 					printf("Problema\n");
 				}
 				printf("Valor5:%s\n",yytext);
-				identifiers=(char*)realloc(identifiers, strlen(value)+strlen(yytext)+2);
+				//identifiers=(char*)realloc(identifiers, strlen(value)+strlen(yytext)+2);
 				strcat(identifiers, value);
 				strcat(identifiers, " ");
 				strcat(identifiers, yytext);
@@ -311,11 +313,11 @@ int define(int ntoken){
 		}
 		else if(strcmp(variable,"")==1 &&existeDefine(yytext)!=-1){
 
-			char* tmp;
+			char* tmp[50000];
 		
-			tmp=(char*)malloc(strlen(defines[existeDefine(yytext)].vDefine));
+			//tmp=(char*)malloc(strlen(defines[existeDefine(yytext)].vDefine));
 			strcpy(tmp,defines[existeDefine(yytext)].vDefine);
-			identifiers=(char*)realloc(identifiers, strlen(tmp)+1);
+			//identifiers=(char*)realloc(identifiers, strlen(tmp)+1);
 			strcat(identifiers,tmp);
 			strcat(identifiers, " ");
 
@@ -325,19 +327,23 @@ int define(int ntoken){
 		
 		else if(strcmp(variable,"")!=0){
 		  printf("Valor6:%s\n",yytext);
-          char* temp;
-		  temp=(char*)realloc(identifiers, strlen(yytext)+1);
-          if(temp)
+          char* temp[50000];
+          printf("Aqui no%d\n", strlen(yytext));
+		  //temp=(char*)realloc(identifiers, strlen(yytext)+1);
+
+		  printf("JA LOS ENGAÑE\n");
+          /*if(temp)
             identifiers = temp;
             else
                 printf("Mal puntero %p\n", temp);
-         
+         */
 		  strcat(identifiers, yytext);
 		  strcat(identifiers, " ");
 		  position++;
 		}
 
 		if(strcmp(yytext,"\n")!=0){
+			printf("%s\n",yytext );	
 		   ntoken=nextToken();
 		}else{
 			printf("Se supone que sale\n");
@@ -361,9 +367,15 @@ int define(int ntoken){
 
 
 void yyerror(char *texto,char *simbolo, int linea){
-     
+	if(preproceso){
+		fputs(simbolo,archivotmp);
+		fputs(" ", archivotmp);
+	   
+	}else{
+
         printf(texto,simbolo,linea);
-        
+	}
+       
  
 
 };
@@ -404,7 +416,7 @@ int main(int argc, char *argv[])
         FILE *archivoEntrada;
         FILE *tmpfile = fopen("tmpfile.c", "w");
         archivoEntrada  = fopen(argv[1], "r");
-        
+        archivotmp=tmpfile;
         /*
             Se le indica a flex cuál es el archivo actual que se está leyendo
         */
@@ -415,8 +427,13 @@ int main(int argc, char *argv[])
 		if(tmpfile!=NULL){
 		
             //scanner();
-            preprocesador1(archivoEntrada,tmpfile); //Se llama a la función del preprocesador con el archivo de entrada
-        
+            preproceso=true;
+            preprocesador1(archivoEntrada,tmpfile);
+            fclose(tmpfile);
+            preproceso=false;
+            tmpfile = fopen("tmpfile.c", "r"); //Se llama a la función del preprocesador con el archivo de entrada
+        	yyin = tmpfile; 
+        	scanner();
 	       	
 	    }else{
 	    	printf("Archivo esta nulo\n");
@@ -424,8 +441,7 @@ int main(int argc, char *argv[])
 
         printf("Termino\n");
         
-        //fclose(archivoParaPreprocesar);
-        
+       
       
         fclose(tmpfile);
         fclose(archivoEntrada);
@@ -434,25 +450,6 @@ int main(int argc, char *argv[])
 
         
      }
-
-
-     /*
-    FILE *f = leerArchivo(argv[1]);
-    openfilepreprocess(f, argv[1]);
-    if (error == false){
-
-        FILE *temporal = fopen("config.c", "r");
-        imprimirArchivoEntrada(temporal);
-        //fclose(temporal);
-        //scanner();
-        //system("pdflatex main.tex");
-        //system("evince --presentation main.pdf");
-    }
-
-
-
-    limpiarDocumento("config.c");*/
-
 
     return 0; 
 }

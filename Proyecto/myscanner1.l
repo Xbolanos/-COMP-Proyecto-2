@@ -62,6 +62,7 @@ L?'(\\.|[^\\'])+'	             			return CONSTANT;
 ";"                       return PUNTUACTOR;
 ":"                       return PUNTUACTOR;
 
+"!"                       return OPERATOR;
 "~"                       return OPERATOR;
 "?"                       return OPERATOR;
 "^"                       return OPERATOR;
@@ -103,13 +104,13 @@ L?'(\\.|[^\\'])+'	             			return CONSTANT;
 
 
 
-[a-zA-Z][_a-zA-Z0-9]*	          return IDENTIFIER;
+[a-zA-Z][_a-zA-Z0-9]*|_	          return IDENTIFIER;
 
 L?\"(\\.|[^\\"]|\n)*\"         	  return LITERAL;
 L?\'(\\.|[^\\"]|\n)*\'        	  return LITERAL;
 
 
-\n|\z|\s		 						return ENDLINE;
+\n|\z|\s		 					return ENDLINE;
         	                 	  
 
 [ \t\n]
