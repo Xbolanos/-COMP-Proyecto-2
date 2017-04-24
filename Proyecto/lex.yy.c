@@ -1114,13 +1114,13 @@ return KEYWORD;
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 42 "myscanner1.l"
+#line 41 "myscanner1.l"
 return INTEGER;
 	YY_BREAK
 case 34:
 /* rule 34 can match eol */
 YY_RULE_SETUP
-#line 44 "myscanner1.l"
+#line 42 "myscanner1.l"
 return COMMENT;
 	YY_BREAK
 case 35:
@@ -1128,312 +1128,312 @@ case 35:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 45 "myscanner1.l"
+#line 43 "myscanner1.l"
 return COMMENT;
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 46 "myscanner1.l"
+#line 44 "myscanner1.l"
 return CONSTANT;
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 47 "myscanner1.l"
+#line 45 "myscanner1.l"
 return CONSTANT;
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 48 "myscanner1.l"
+#line 46 "myscanner1.l"
 return CONSTANT;
 	YY_BREAK
 case 39:
 /* rule 39 can match eol */
 YY_RULE_SETUP
-#line 49 "myscanner1.l"
+#line 47 "myscanner1.l"
 return CONSTANT;
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 50 "myscanner1.l"
+#line 48 "myscanner1.l"
 return CONSTANT;
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 51 "myscanner1.l"
+#line 49 "myscanner1.l"
 return CONSTANT;
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 52 "myscanner1.l"
+#line 50 "myscanner1.l"
 return CONSTANT;
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 55 "myscanner1.l"
+#line 51 "myscanner1.l"
 return PUNTUACTOR;
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 56 "myscanner1.l"
+#line 52 "myscanner1.l"
 return PUNTUACTOR;
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 57 "myscanner1.l"
+#line 53 "myscanner1.l"
 return PUNTUACTOR;
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 58 "myscanner1.l"
+#line 54 "myscanner1.l"
 return PUNTUACTOR;
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 59 "myscanner1.l"
+#line 55 "myscanner1.l"
 return PUNTUACTOR;
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 60 "myscanner1.l"
+#line 56 "myscanner1.l"
 return PUNTUACTOR;
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 61 "myscanner1.l"
+#line 57 "myscanner1.l"
 return PUNTUACTOR;
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 62 "myscanner1.l"
+#line 58 "myscanner1.l"
 return PUNTUACTOR;
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 63 "myscanner1.l"
+#line 59 "myscanner1.l"
 return PUNTUACTOR;
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 65 "myscanner1.l"
+#line 60 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 66 "myscanner1.l"
+#line 61 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 67 "myscanner1.l"
+#line 62 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 68 "myscanner1.l"
+#line 63 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 69 "myscanner1.l"
+#line 64 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 70 "myscanner1.l"
+#line 65 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 71 "myscanner1.l"
+#line 66 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 72 "myscanner1.l"
+#line 67 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 73 "myscanner1.l"
+#line 68 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 74 "myscanner1.l"
+#line 69 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 75 "myscanner1.l"
+#line 70 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 76 "myscanner1.l"
+#line 71 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 77 "myscanner1.l"
+#line 72 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 78 "myscanner1.l"
+#line 73 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 79 "myscanner1.l"
+#line 74 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 80 "myscanner1.l"
+#line 75 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 81 "myscanner1.l"
+#line 76 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 82 "myscanner1.l"
+#line 77 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 83 "myscanner1.l"
+#line 78 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 84 "myscanner1.l"
+#line 79 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 85 "myscanner1.l"
+#line 80 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 86 "myscanner1.l"
+#line 81 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 87 "myscanner1.l"
+#line 82 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 88 "myscanner1.l"
+#line 83 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 76:
 YY_RULE_SETUP
-#line 89 "myscanner1.l"
+#line 84 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 77:
 YY_RULE_SETUP
-#line 90 "myscanner1.l"
+#line 85 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 78:
 YY_RULE_SETUP
-#line 91 "myscanner1.l"
+#line 86 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 79:
 YY_RULE_SETUP
-#line 92 "myscanner1.l"
+#line 87 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 80:
 YY_RULE_SETUP
-#line 93 "myscanner1.l"
+#line 88 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 81:
 YY_RULE_SETUP
-#line 94 "myscanner1.l"
+#line 89 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 82:
 YY_RULE_SETUP
-#line 95 "myscanner1.l"
+#line 90 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 83:
 YY_RULE_SETUP
-#line 96 "myscanner1.l"
+#line 91 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 84:
 YY_RULE_SETUP
-#line 97 "myscanner1.l"
+#line 92 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 85:
 YY_RULE_SETUP
-#line 98 "myscanner1.l"
+#line 93 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 86:
 YY_RULE_SETUP
-#line 99 "myscanner1.l"
+#line 94 "myscanner1.l"
 return OPERATOR;
 	YY_BREAK
 case 87:
 YY_RULE_SETUP
-#line 101 "myscanner1.l"
+#line 95 "myscanner1.l"
 return INCLUDE;
 	YY_BREAK
 case 88:
 YY_RULE_SETUP
-#line 102 "myscanner1.l"
+#line 96 "myscanner1.l"
 return DEFINE;
 	YY_BREAK
 case 89:
 YY_RULE_SETUP
-#line 107 "myscanner1.l"
+#line 97 "myscanner1.l"
 return IDENTIFIER;
 	YY_BREAK
 case 90:
 /* rule 90 can match eol */
 YY_RULE_SETUP
-#line 109 "myscanner1.l"
+#line 98 "myscanner1.l"
 return LITERAL;
 	YY_BREAK
 case 91:
 /* rule 91 can match eol */
 YY_RULE_SETUP
-#line 110 "myscanner1.l"
+#line 99 "myscanner1.l"
 return LITERAL;
 	YY_BREAK
 case 92:
 /* rule 92 can match eol */
 YY_RULE_SETUP
-#line 113 "myscanner1.l"
+#line 100 "myscanner1.l"
 return ENDLINE;
 	YY_BREAK
 case 93:
 /* rule 93 can match eol */
 YY_RULE_SETUP
-#line 116 "myscanner1.l"
+#line 103 "myscanner1.l"
 
 	YY_BREAK
 case 94:
 YY_RULE_SETUP
-#line 118 "myscanner1.l"
+#line 105 "myscanner1.l"
 yyerror("Error léxico con \"%s\", en línea %i.\n",yytext,linea);
 	YY_BREAK
 case 95:
 YY_RULE_SETUP
-#line 121 "myscanner1.l"
+#line 108 "myscanner1.l"
 ECHO;
 	YY_BREAK
 #line 1440 "lex.yy.c"
@@ -2437,7 +2437,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 121 "myscanner1.l"
+#line 108 "myscanner1.l"
 
 
 
