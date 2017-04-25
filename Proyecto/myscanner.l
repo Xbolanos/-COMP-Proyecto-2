@@ -57,7 +57,7 @@ L?'(\\.|[^\\'])+'	             											return CONSTANT;
 ","                       													return COMMA;
 "("                       													return LEFT_PARENTHESIS;
 ")"                       													return RIGHT_PARENTHESIS;
-"]"                       													return LEFT_SBRACKET;
+"]"                       													return RIGHT_SBRACKET;
 "["                       													return LEFT_SBRACKET;
 ";"                       													return SEMICOLON;
 ":"                       													return COLON;
@@ -68,7 +68,7 @@ L?'(\\.|[^\\'])+'	             											return CONSTANT;
 "+"			              													return PLUS;
 "-"			              													return MINUS;
 "/"			              													return DIV;
-"%"			              													return MODU;
+"%"			              													return MOD;
 "*"			              													return MUL;
 "++"			          													return INC_OP;
 "--"			          													return DEC_OP;
@@ -84,9 +84,9 @@ L?'(\\.|[^\\'])+'	             											return CONSTANT;
 "*="			          													return MUL_ASSIGN;
 "/="			          													return DIV_ASSIGN;
 "%="			          													return MOD_ASSIGN;
-"."			              													return OPERATOR;
-"&"			              													return OPERATOR;
-"|"			              													return OPERATOR;
+"."			              													return DOT;
+"&"			              													return BIT_AND;
+"|"			              													return BIT_OR;
 "->"			          													return PTR_OP;
 "&&"			          													return AND_OP;
 "||"			         													return OR_OP;
@@ -105,7 +105,7 @@ L?'(\\.|[^\\'])+'	             											return CONSTANT;
 L?\"(\\.|[^\\"]|\n)*\"         	  											return LITERAL;
 L?\'(\\.|[^\\"]|\n)*\'        	  											return LITERAL;
 \n|\z|\s		 															return ENDLINE;
-        	                 	  
+
 
 [ \t\n]
 
