@@ -1,415 +1,444 @@
 %defines 
 %{
 	#pragma warning(disable: 4996)
-	#include <iostream>
-	#include <cmath>
 	extern int yylex();
-	extern void yyerror(char const* msj)
+	//extern void yyerror(char *texto);
 
 %}
+%token  LITERAL INCLUDE DEFINE
+%token LEFT_BRACKET RIGHT_BRACKET COMMA LEFT_PARENTHESIS RIGHT_PARENTHESIS RIGHT_SBRACKET LEFT_SBRACKET SEMICOLON COLON EXCLAMATION PRIME INTERROGATION UP_ARROW DOT
+%token BIT_AND BIT_OR
+%token COMMENT 
+%token PLUS MINUS DIV MOD MUL 
+%token  EQU LESS GREATER 
+%token IDENTIFIER CONSTANT STRING_LITERAL SIZEOF INTEGER
+%token PTR_OP INC_OP DEC_OP LEFT_OP RIGHT_OP LE_OP GE_OP EQ_OP NE_OP
+%token AND_OP OR_OP MUL_ASSIGN DIV_ASSIGN MOD_ASSIGN ADD_ASSIGN
+%token SUB_ASSIGN LEFT_ASSIGN RIGHT_ASSIGN AND_ASSIGN
+%token XOR_ASSIGN OR_ASSIGN TYPE_NAME
+
+%token TYPEDEF EXTERN STATIC AUTO REGISTER
+%token CHAR SHORT INT LONG SIGNED UNSIGNED FLOAT DOUBLE CONST VOLATILE VOID
+%token STRUCT UNION ENUM ELLIPSIS
+
+%token CASE DEFAULT IF ELSE SWITCH WHILE DO FOR GOTO CONTINUE BREAK RETURN
+
+%start translation_unit
 %%
 
 
 primary_expression
-	: IDENTIFIER
-	| CONSTANT
-	| COMMENT
-	| LEFT_PARENTHESIS expression RIGHT_PARENTHESIS
+	: IDENTIFIER {printf("Entro 1\n");}
+	| CONSTANT {printf("Entro 1\n");}
+	| COMMENT {printf("Entro 1\n");}
+	| LEFT_PARENTHESIS expression RIGHT_PARENTHESIS {printf("Entro 1\n");}
+	| INTEGER {printf("Entro 1\n");}
 	;
 
 postfix_expression
-	: primary_expression
-	| postfix_expression RIGHT_SBRACKET expression LEFT_SBRACKET
-	| postfix_expression LEFT_PARENTHESIS RIGHT_PARENTHESIS
-	| postfix_expression LEFT_PARENTHESIS argument_expression_list RIGHT_PARENTHESIS
-	| postfix_expression DOT IDENTIFIER
-	| postfix_expression PTR_OP IDENTIFIER
-	| postfix_expression INC_OP
-	| postfix_expression DEC_OP
+	: primary_expression {printf("Entro 1\n");}
+	| postfix_expression RIGHT_SBRACKET expression LEFT_SBRACKET {printf("Entro 1\n");}
+	| postfix_expression LEFT_PARENTHESIS RIGHT_PARENTHESIS {printf("Entro 1\n");}
+	| postfix_expression LEFT_PARENTHESIS argument_expression_list RIGHT_PARENTHESIS {printf("Entro 1\n");}
+	| postfix_expression DOT IDENTIFIER {printf("Entro 1\n");}
+	| postfix_expression PTR_OP IDENTIFIER {printf("Entro 1\n");}
+	| postfix_expression INC_OP {printf("Entro 1\n");}
+	| postfix_expression DEC_OP {printf("Entro 1\n");}
 	;
 
+
+
 argument_expression_list
-	: assignment_expression
-	| argument_expression_list COMMA assignment_expression
+	: assignment_expression {printf("Entro 1\n");}
+	| argument_expression_list COMMA assignment_expression {printf("Entro 1\n");}
 	;
 
 unary_expression
-	: postfix_expression
-	| INC_OP unary_expression
-	| DEC_OP unary_expression
-	| unary_operator cast_expression
-	| SIZEOF unary_expression
-	| SIZEOF LEFT_PARENTHESIS type_name RIGHT_PARENTHESIS
+	: postfix_expression {printf("Entro 1\n");}
+	| INC_OP unary_expression {printf("Entro 1\n");}
+	| DEC_OP unary_expression {printf("Entro 1\n");}
+	| unary_operator cast_expression {printf("Entro 1\n");}
+	| SIZEOF unary_expression {printf("Entro 1\n");}
+	| SIZEOF LEFT_PARENTHESIS type_name RIGHT_PARENTHESIS {printf("Entro 1\n");}
 	;
 
 unary_operator
-	: BIT_AND
-	| MUL
-	| PLUS
-	| MINUS
-	| PRIME
-	| EXCLAMATION
+	: BIT_AND {printf("Entro 1\n");} 
+	| MUL {printf("Entro 1\n");}
+	| PLUS {printf("Entro 1\n");}
+	| MINUS {printf("Entro 1\n");}
+	| PRIME {printf("Entro 1\n");}
+	| EXCLAMATION {printf("Entro 1\n");}
 	;
 
 cast_expression
-	: unary_expression
-	| LEFT_PARENTHESIS type_name RIGHT_PARENTHESIS cast_expression
+	: unary_expression {printf("Entro 1\n");}
+	| LEFT_PARENTHESIS type_name RIGHT_PARENTHESIS cast_expression {printf("Entro 1\n");}
 	;
 
 multiplicative_expression
-	: cast_expression
-	| multiplicative_expression MUL cast_expression
-	| multiplicative_expression DIV cast_expression
-	| multiplicative_expression MOD cast_expression
+	: cast_expression {printf("Entro 1\n");}
+	| multiplicative_expression MUL cast_expression {printf("Entro 1\n");}
+	| multiplicative_expression DIV cast_expression {printf("Entro 1\n");}
+	| multiplicative_expression MOD cast_expression {printf("Entro 1\n");}
 	;
 
 additive_expression
-	: multiplicative_expression
-	| additive_expression PLUS multiplicative_expression
-	| additive_expression MINUS multiplicative_expression
+	: multiplicative_expression {printf("Entro 1\n");}
+	| additive_expression PLUS multiplicative_expression {printf("Entro 1\n");}
+	| additive_expression MINUS multiplicative_expression {printf("Entro 1\n");}
 	;
 
 shift_expression
-	: additive_expression
-	| shift_expression LEFT_OP additive_expression
-	| shift_expression RIGHT_OP additive_expression
+	: additive_expression {printf("Entro 1\n");}
+	| shift_expression LEFT_OP additive_expression {printf("Entro 1\n");}
+	| shift_expression RIGHT_OP additive_expression {printf("Entro 1\n");}
 	;
 
 relational_expression
-	: shift_expression
-	| relational_expression LESS shift_expression
-	| relational_expression GREATER shift_expression
-	| relational_expression LE_OP shift_expression
-	| relational_expression GE_OP shift_expression
+	: shift_expression {printf("Entro 1\n");}
+	| relational_expression LESS shift_expression {printf("Entro 1\n");}
+	| relational_expression GREATER shift_expression {printf("Entro 1\n");}
+	| relational_expression LE_OP shift_expression {printf("Entro 1\n");}
+	| relational_expression GE_OP shift_expression {printf("Entro 1\n");}
 	;
 
 equality_expression
-	: relational_expression
-	| equality_expression EQ_OP relational_expression
-	| equality_expression NE_OP relational_expression
+	: relational_expression {printf("Entro 1\n");}
+	| equality_expression EQ_OP relational_expression {printf("Entro 1\n");}
+	| equality_expression NE_OP relational_expression {printf("Entro 1\n");}
 	;
 
 and_expression
-	: equality_expression
-	| and_expression BIT_AND equality_expression
+	: equality_expression {printf("Entro 1\n");}
+	| and_expression BIT_AND equality_expression {printf("Entro 1\n");}
 	;
 
 exclusive_or_expression
-	: and_expression
-	| exclusive_or_expression UP_ARROW and_expression
+	: and_expression {printf("Entro 1\n");}
+	| exclusive_or_expression UP_ARROW and_expression {printf("Entro 1\n");}
 	;
 
 inclusive_or_expression
-	: exclusive_or_expression
-	| inclusive_or_expression BIT_OR exclusive_or_expression
+	: exclusive_or_expression {printf("Entro 1\n");}
+	| inclusive_or_expression BIT_OR exclusive_or_expression {printf("Entro 1\n");}
 	;
 
 logical_and_expression
-	: inclusive_or_expression
-	| logical_and_expression AND_OP inclusive_or_expression
+	: inclusive_or_expression {printf("Entro 1\n");}
+	| logical_and_expression AND_OP inclusive_or_expression {printf("Entro 1\n");}
 	;
 
 logical_or_expression
-	: logical_and_expression
-	| logical_or_expression OR_OP logical_and_expression
+	: logical_and_expression {printf("Entro 1\n");}
+	| logical_or_expression OR_OP logical_and_expression {printf("Entro 1\n");}
 	;
 
 conditional_expression
-	: logical_or_expression
-	| logical_or_expression INTERROGATION expression COLON conditional_expression
+	: logical_or_expression {printf("Entro 1\n");}
+	| logical_or_expression INTERROGATION expression COLON conditional_expression {printf("Entro 1\n");}
 	;
 
 assignment_expression
-	: conditional_expression
-	| unary_expression assignment_operator assignment_expression
+	: conditional_expression {printf("Entro 1\n");}
+	| unary_expression assignment_operator assignment_expression {printf("Entro 1\n");}
 	;
 
 assignment_operator
-	: EQU
-	| MUL_ASSIGN
-	| DIV_ASSIGN
-	| MOD_ASSIGN
-	| ADD_ASSIGN
-	| SUB_ASSIGN
-	| LEFT_ASSIGN
-	| RIGHT_ASSIGN
-	| AND_ASSIGN
-	| XOR_ASSIGN
-	| OR_ASSIGN
+	: EQU {printf("Entro 1\n");}
+	| MUL_ASSIGN {printf("Entro 1\n");}
+	| DIV_ASSIGN {printf("Entro 1\n");}
+	| MOD_ASSIGN {printf("Entro 1\n");}
+	| ADD_ASSIGN {printf("Entro 1\n");}
+	| SUB_ASSIGN {printf("Entro 1\n");}
+	| LEFT_ASSIGN {printf("Entro 1\n");}
+	| RIGHT_ASSIGN {printf("Entro 1\n");}
+	| AND_ASSIGN {printf("Entro 1\n");}
+	| XOR_ASSIGN {printf("Entro 1\n");}
+	| OR_ASSIGN {printf("Entro 1\n");}
 	;
 
 expression
-	: assignment_expression
-	| expression COMMA assignment_expression
+	: assignment_expression {printf("Entro 1\n");}
+	| expression COMMA assignment_expression {printf("Entro 1\n");}
 	;
 
 constant_expression
-	: conditional_expression
+	: conditional_expression {printf("Entro 1\n");}
 	;
 
 declaration
-	: declaration_specifiers SEMICOLON
-	| declaration_specifiers init_declarator_list SEMICOLON
+	: declaration_specifiers SEMICOLON {printf("Entro 1\n");}
+	| declaration_specifiers init_declarator_list SEMICOLON {printf("Entro 1\n");}
 	;
 
 declaration_specifiers
-	: storage_class_specifier
-	| storage_class_specifier declaration_specifiers
-	| type_specifier
-	| type_specifier declaration_specifiers
-	| type_qualifier
-	| type_qualifier declaration_specifiers
+	: storage_class_specifier {printf("Entro 1\n");}
+	| storage_class_specifier declaration_specifiers {printf("Entro 1\n");}
+	| type_specifier {printf("Entro 1\n");}
+	| type_specifier declaration_specifiers {printf("Entro 1\n");}
+	| type_qualifier {printf("Entro 1\n");}
+	| type_qualifier declaration_specifiers {printf("Entro 1\n");}
 	;
 
 init_declarator_list
-	: init_declarator
-	| init_declarator_list COMMA init_declarator
+	: init_declarator {printf("Entro 1\n");}
+	| init_declarator_list COMMA init_declarator {printf("Entro 1\n");}
 	;
 
 init_declarator
-	: declarator
-	| declarator EQU initializer
+	: declarator {printf("Entro 1\n");}
+	| declarator EQU initializer {printf("Entro 1\n");}
 	;
 
 storage_class_specifier
-	: TYPEDEF
-	| EXTERN
-	| STATIC
-	| AUTO
-	| REGISTER
+	: TYPEDEF {printf("Entro 1\n");}
+	| EXTERN {printf("Entro 1\n");}
+	| STATIC {printf("Entro 1\n");}
+	| AUTO {printf("Entro 1\n");}
+	| REGISTER {printf("Entro 1\n");}
 	;
 
 type_specifier
-	: VOID
-	| CHAR
-	| SHORT
-	| INT
-	| LONG
-	| FLOAT
-	| DOUBLE
-	| SIGNED
-	| UNSIGNED
-	| struct_or_union_specifier
-	| enum_specifier
-	| TYPE_NAME
+	: VOID {printf("Entro 1\n");}
+	| CHAR {printf("Entro 1\n");}
+	| SHORT {printf("Entro 1\n");}
+	| INT {printf("Entro 1\n");}
+	| LONG {printf("Entro 1\n");}
+	| FLOAT {printf("Entro 1\n");}
+	| DOUBLE {printf("Entro 1\n");}
+	| SIGNED {printf("Entro 1\n");}
+	| UNSIGNED {printf("Entro 1\n");}
+	| struct_or_union_specifier {printf("Entro 1\n");}
+	| enum_specifier {printf("Entro 1\n");}
+	| TYPE_NAME {printf("Entro 1\n");}
 	;
 
 struct_or_union_specifier
-	: struct_or_union IDENTIFIER LEFT_BRACKET struct_declaration_list RIGHT_BRACKET
-	| struct_or_union LEFT_BRACKET struct_declaration_list RIGHT_BRACKET
+	: struct_or_union IDENTIFIER LEFT_BRACKET struct_declaration_list RIGHT_BRACKET {printf("Entro 1\n");}
+	| struct_or_union LEFT_BRACKET struct_declaration_list RIGHT_BRACKET {printf("Entro 1\n");}
 	| struct_or_union IDENTIFIER
 	;
 
 struct_or_union
-	: STRUCT
-	| UNION
+	: STRUCT {printf("Entro 1\n");}
+	| UNION {printf("Entro 1\n");}
 	;
 
 struct_declaration_list
-	: struct_declaration
-	| struct_declaration_list struct_declaration
+	: struct_declaration {printf("Entro 1\n");}
+	| struct_declaration_list struct_declaration {printf("Entro 1\n");}
 	;
 
 struct_declaration
-	: specifier_qualifier_list struct_declarator_list SEMICOLON
+	: specifier_qualifier_list struct_declarator_list SEMICOLON {printf("Entro 1\n");}
 	;
 
 specifier_qualifier_list
-	: type_specifier specifier_qualifier_list
-	| type_specifier
-	| type_qualifier specifier_qualifier_list
-	| type_qualifier
+	: type_specifier specifier_qualifier_list {printf("Entro 1\n");}
+	| type_specifier {printf("Entro 1\n");}
+	| type_qualifier specifier_qualifier_list {printf("Entro 1\n");}
+	| type_qualifier {printf("Entro 1\n");}
 	;
 
 struct_declarator_list
-	: struct_declarator
-	| struct_declarator_list COMMA struct_declarator
+	: struct_declarator {printf("Entro 1\n");}
+	| struct_declarator_list COMMA struct_declarator {printf("Entro 1\n");}
 	;
 
 struct_declarator
-	: declarator
-	| COLON constant_expression
-	| declarator COLON constant_expression
+	: declarator{printf("Entro 1\n");}
+	| COLON constant_expression {printf("Entro 1\n");}
+	| declarator COLON constant_expression {printf("Entro 1\n");}
 	;
 
 enum_specifier
-	: ENUM LEFT_BRACKET enumerator_list RIGHT_BRACKET
-	| ENUM IDENTIFIER LEFT_BRACKET enumerator_list RIGHT_BRACKET
-	| ENUM IDENTIFIER
+	: ENUM LEFT_BRACKET enumerator_list RIGHT_BRACKET {printf("Entro 1\n");}
+	| ENUM IDENTIFIER LEFT_BRACKET enumerator_list RIGHT_BRACKET {printf("Entro 1\n");}
+	| ENUM IDENTIFIER {printf("Entro 1\n");}
 	;
 
 enumerator_list
-	: enumerator
-	| enumerator_list COMMA enumerator
+	: enumerator {printf("Entro 1\n");}
+	| enumerator_list COMMA enumerator {printf("Entro 1\n");}
 	;
 
 enumerator
-	: IDENTIFIER
-	| IDENTIFIER EQU constant_expression
+	: IDENTIFIER {printf("Entro 1\n");}
+	| IDENTIFIER EQU constant_expression {printf("Entro 1\n");}
 	;
 
 type_qualifier
-	: CONST
-	| VOLATILE
+	: CONST {printf("Entro 1\n");}
+	| VOLATILE {printf("Entro 1\n");}
 	;
 
 declarator
-	: pointer direct_declarator
-	| direct_declarator
+	: pointer direct_declarator {printf("Entro 1\n");}
+	| direct_declarator {printf("Entro 1\n");}
 	;
 
 direct_declarator
-	: IDENTIFIER
-	| LEFT_PARENTHESIS declarator RIGHT_PARENTHESIS
-	| direct_declarator RIGHT_SBRACKET constant_expression LEFT_SBRACKET
-	| direct_declarator RIGHT_SBRACKET LEFT_SBRACKET
-	| direct_declarator LEFT_PARENTHESIS parameter_type_list RIGHT_PARENTHESIS
-	| direct_declarator LEFT_PARENTHESIS identifier_list RIGHT_PARENTHESIS
-	| direct_declarator LEFT_PARENTHESIS RIGHT_PARENTHESIS
+	: IDENTIFIER {printf("Entro 1\n");}
+	| LEFT_PARENTHESIS declarator RIGHT_PARENTHESIS {printf("Entro 1\n");}
+	| direct_declarator RIGHT_SBRACKET constant_expression LEFT_SBRACKET {printf("Entro 1\n");}
+	| direct_declarator RIGHT_SBRACKET LEFT_SBRACKET {printf("Entro 1\n");}
+	| direct_declarator LEFT_PARENTHESIS parameter_type_list RIGHT_PARENTHESIS {printf("Entro 1\n");}
+	| direct_declarator LEFT_PARENTHESIS identifier_list RIGHT_PARENTHESIS {printf("Entro 1\n");}
+	| direct_declarator LEFT_PARENTHESIS RIGHT_PARENTHESIS {printf("Entro 1\n");}
 	;
 
 pointer
-	: MUL
-	| MUL type_qualifier_list
-	| MUL pointer
-	| MUL type_qualifier_list pointer
+	: MUL {printf("Entro 1\n");}
+	| MUL type_qualifier_list {printf("Entro 1\n");}
+	| MUL pointer {printf("Entro 1\n");}
+	| MUL type_qualifier_list pointer {printf("Entro 1\n");}
 	;
 
 type_qualifier_list
-	: type_qualifier
-	| type_qualifier_list type_qualifier
+	: type_qualifier {printf("Entro 1\n");}
+	| type_qualifier_list type_qualifier {printf("Entro 1\n");}
 	;
 
 
 parameter_type_list
-	: parameter_list
-	| parameter_list COMMA ELLIPSIS
+	: parameter_list {printf("Entro 1\n");}
+	| parameter_list COMMA ELLIPSIS {printf("Entro 1\n");}
 	;
 
 parameter_list
-	: parameter_declaration
-	| parameter_list COMMA parameter_declaration
+	: parameter_declaration {printf("Entro 1\n");}
+	| parameter_list COMMA parameter_declaration {printf("Entro 1\n");}
 	;
 
 parameter_declaration
-	: declaration_specifiers declarator
-	| declaration_specifiers abstract_declarator
-	| declaration_specifiers
+	: declaration_specifiers declarator {printf("Entro 1\n");}
+	| declaration_specifiers abstract_declarator {printf("Entro 1\n");}
+	| declaration_specifiers {printf("Entro 1\n");}
 	;
 
 identifier_list
-	: IDENTIFIER
-	| identifier_list COMMA IDENTIFIER
+	: IDENTIFIER {printf("Entro 1\n");}
+	| identifier_list COMMA IDENTIFIER {printf("Entro 1\n");}
 	;
 
 type_name
-	: specifier_qualifier_list
-	| specifier_qualifier_list abstract_declarator
+	: specifier_qualifier_list {printf("Entro 1\n");}
+	| specifier_qualifier_list abstract_declarator {printf("Entro 1\n");}
 	;
 
 abstract_declarator
-	: pointer
-	| direct_abstract_declarator
-	| pointer direct_abstract_declarator
+	: pointer {printf("Entro 1\n");}
+	| direct_abstract_declarator {printf("Entro 1\n");}
+	| pointer direct_abstract_declarator {printf("Entro 1\n");}
 	;
 
 direct_abstract_declarator
-	: LEFT_PARENTHESIS abstract_declarator RIGHT_PARENTHESIS
-	| RIGHT_SBRACKET LEFT_SBRACKET
-	| RIGHT_SBRACKET constant_expression LEFT_SBRACKET
-	| direct_abstract_declarator RIGHT_SBRACKET LEFT_SBRACKET
-	| direct_abstract_declarator RIGHT_SBRACKET constant_expression LEFT_SBRACKET
-	| LEFT_PARENTHESIS RIGHT_PARENTHESIS
-	| LEFT_PARENTHESIS parameter_type_list RIGHT_PARENTHESIS
-	| direct_abstract_declarator LEFT_PARENTHESIS RIGHT_PARENTHESIS
-	| direct_abstract_declarator LEFT_PARENTHESIS parameter_type_list RIGHT_PARENTHESIS
+	: LEFT_PARENTHESIS abstract_declarator RIGHT_PARENTHESIS {printf("Entro 1\n");}
+	| RIGHT_SBRACKET LEFT_SBRACKET {printf("Entro 1\n");}
+	| RIGHT_SBRACKET constant_expression LEFT_SBRACKET {printf("Entro 1\n");}
+	| direct_abstract_declarator RIGHT_SBRACKET LEFT_SBRACKET {printf("Entro 1\n");}
+	| direct_abstract_declarator RIGHT_SBRACKET constant_expression LEFT_SBRACKET {printf("Entro 1\n");}
+	| LEFT_PARENTHESIS RIGHT_PARENTHESIS {printf("Entro 1\n");}
+	| LEFT_PARENTHESIS parameter_type_list RIGHT_PARENTHESIS {printf("Entro 1\n");}
+	| direct_abstract_declarator LEFT_PARENTHESIS RIGHT_PARENTHESIS {printf("Entro 1\n");}
+	| direct_abstract_declarator LEFT_PARENTHESIS parameter_type_list RIGHT_PARENTHESIS {printf("Entro 1\n");}
 	;
 
 initializer
-	: assignment_expression
-	| LEFT_BRACKET initializer_list RIGHT_BRACKET
-	| LEFT_BRACKET initializer_list COMMA RIGHT_BRACKET
+	: assignment_expression {printf("Entro 1\n");}
+	| LEFT_BRACKET initializer_list RIGHT_BRACKET {printf("Entro 1\n");}
+	| LEFT_BRACKET initializer_list COMMA RIGHT_BRACKET {printf("Entro 1\n");}
 	;
 
 initializer_list
-	: initializer
-	| initializer_list COMMA initializer
+	: initializer {printf("Entro 1\n");}
+	| initializer_list COMMA initializer {printf("Entro 1\n");}
 	;
 
 statement
-	: labeled_statement
-	| compound_statement
-	| expression_statement
-	| selection_statement
-	| iteration_statement
-	| jump_statement
+	: labeled_statement {printf("Entro 1\n");}
+	| compound_statement {printf("Entro 1\n");}
+	| expression_statement {printf("Entro 1\n");}
+	| selection_statement {printf("Entro 1\n");}
+	| iteration_statement {printf("Entro 1\n");}
+	| jump_statement {printf("Entro 1\n");}
 	;
 
 labeled_statement
-	: IDENTIFIER COLON statement
-	| CASE constant_expression COLON statement
-	| DEFAULT COLON statement
+	: IDENTIFIER COLON statement {printf("Entro 1\n");}
+	| CASE constant_expression COLON statement {printf("Entro 1\n");}
+	| DEFAULT COLON statement {printf("Entro 1\n");}
 	;
 
 compound_statement
-	: LEFT_BRACKET RIGHT_BRACKET
-	| LEFT_BRACKET statement_list RIGHT_BRACKET
-	| LEFT_BRACKET declaration_list RIGHT_BRACKET
-	| LEFT_BRACKET declaration_list statement_list RIGHT_BRACKET
+	: LEFT_BRACKET RIGHT_BRACKET {printf("Entro 1\n");}
+	| LEFT_BRACKET statement_list RIGHT_BRACKET {printf("Entro 1\n");}
+	| LEFT_BRACKET declaration_list RIGHT_BRACKET {printf("Entro 1\n");}
+	| LEFT_BRACKET declaration_list statement_list RIGHT_BRACKET {printf("Entro 1\n");}
 	;
 
 declaration_list
-	: declaration
-	| declaration_list declaration
+	: declaration {printf("Entro 1\n");}
+	| declaration_list declaration {printf("Entro 1\n");}
 	;
 
 statement_list
-	: statement
-	| statement_list statement
+	: statement {printf("Entro 1\n");}
+	| statement_list statement {printf("Entro 1\n");}
 	;
 
 expression_statement
-	: SEMICOLON
-	| expression SEMICOLON
+	: SEMICOLON {printf("Entro 1\n");}
+	| expression SEMICOLON {printf("Entro 1\n");}
 	;
 
 selection_statement
-	: IF LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement
-	| IF LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement ELSE statement
-	| SWITCH LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement
+	: IF LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement {printf("Entro 1\n");}
+	| IF LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement ELSE statement {printf("Entro 1\n");}
+	| SWITCH LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement {printf("Entro 1\n");}
 	;
 
 iteration_statement
-	: WHILE LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement
-	| DO statement WHILE LEFT_PARENTHESIS expression RIGHT_PARENTHESIS SEMICOLON
-	| FOR LEFT_PARENTHESIS expression_statement expression_statement RIGHT_PARENTHESIS statement
-	| FOR LEFT_PARENTHESIS expression_statement expression_statement expression RIGHT_PARENTHESIS statement
+	: WHILE LEFT_PARENTHESIS expression RIGHT_PARENTHESIS statement {printf("Entro 1\n");}
+	| DO statement WHILE LEFT_PARENTHESIS expression RIGHT_PARENTHESIS SEMICOLON {printf("Entro 1\n");}
+	| FOR LEFT_PARENTHESIS expression_statement expression_statement RIGHT_PARENTHESIS statement {printf("Entro 1\n");}
+	| FOR LEFT_PARENTHESIS expression_statement expression_statement expression RIGHT_PARENTHESIS statement {printf("Entro 1\n");}
 	;
 
 jump_statement
-	: GOTO IDENTIFIER SEMICOLON
-	| CONTINUE SEMICOLON
-	| BREAK SEMICOLON
-	| RETURN SEMICOLON
-	| RETURN expression SEMICOLON
+	: GOTO IDENTIFIER SEMICOLON {printf("Entro 1\n");}
+	| CONTINUE SEMICOLON {printf("Entro 1\n");}
+	| BREAK SEMICOLON {printf("Entro 1\n");}
+	| RETURN SEMICOLON {printf("Entro 1\n");}
+	| RETURN expression SEMICOLON {printf("Entro 1\n");}
 	;
 
 translation_unit
-	: external_declaration
-	| translation_unit external_declaration
+	: external_declaration {printf("Entre a external_declaration\n");} 
+	| translation_unit external_declaration  {printf("Entre a ciclo translation_unit\n");}
+	| /* empty */{printf("Archivo Vacío\n");}
+
 	;
 
 external_declaration
-	: function_definition
-	| declaration
+	: function_definition{printf("Entro 1\n");}
+	| declaration {printf("Entro 1\n");}
 	;
 
 function_definition
-	: declaration_specifiers declarator declaration_list compound_statement
-	| declaration_specifiers declarator compound_statement
-	| declarator declaration_list compound_statement
-	| declarator compound_statement
+	: declaration_specifiers declarator declaration_list compound_statement {printf("Entro 1\n");}
+	| declaration_specifiers declarator compound_statement {printf("Entro 1\n");}
+	| declarator declaration_list compound_statement {printf("Entro 1\n");}
+	| declarator compound_statement {printf("Entro 1\n");}
 	;
 
 %%
 
+#include<stdio.h>
+extern linea;
+/*extern void yyerror(char *texto){
+ 	if(strcmp(texto,"syntax error"))
+  		printf(" Syntax Error in Line : %d : %s\n",linea,texto);
+      
+};*/

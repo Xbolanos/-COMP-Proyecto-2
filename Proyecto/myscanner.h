@@ -7,7 +7,6 @@
 #define LITERAL 7
 #define DEFINE 8
 #define INCLUDE 9
-#define ENDLINE 10
 #define COMMENT 11
 
 #define LEFT_BRACKET 12

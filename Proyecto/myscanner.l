@@ -1,7 +1,9 @@
 %{
-#include "myscanner.h"
-void yyerror(char *,char *, int);
-int linea;
+//#include "myscanner.h"
+#include "parser.tab.h"
+void yyerror(char *);
+int linea = 1;
+int endline;
 %}
 
 %%
@@ -104,12 +106,12 @@ L?'(\\.|[^\\'])+'	             											return CONSTANT;
 [a-zA-Z][_a-zA-Z0-9]*|_	          											return IDENTIFIER;
 L?\"(\\.|[^\\"]|\n)*\"         	  											return LITERAL;
 L?\'(\\.|[^\\"]|\n)*\'        	  											return LITERAL;
-\n|\z|\s		 															return ENDLINE;
+\n|\z|\s|\r		 															{linea++;endline=0;/*ignore*/;}
 
 
 [ \t\n]
 
-.|[0-9]*[a-zA-Z][_a-zA-Z0-9]*   yyerror("Error léxico con \"%s\", en línea %i.\n",yytext,linea);
+.|[0-9]*[a-zA-Z][_a-zA-Z0-9]*   											yyerror(yytext);
 
 
 %%

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include "myscanner.h"
+#include "parser.tab.h"
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
