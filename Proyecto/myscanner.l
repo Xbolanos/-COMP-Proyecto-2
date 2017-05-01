@@ -5,7 +5,7 @@ void yyerror(char *);
 int linea = 1;
 int endline;
 char* gramaticas[500000];
-
+int tabs ;
 %}
 
 %%
@@ -110,8 +110,8 @@ L?\"(\\.|[^\\"]|\n)*\"         	  											{strcat(gramaticas,yytext);strcat(g
 L?\'(\\.|[^\\']|\n)*'        	  											{strcat(gramaticas,yytext);strcat(gramaticas," ");return LITERAL;}
 \n|\z|\s|\r		 															{linea++;endline=0;/*ignore*/;}
 
-
-[ \t\n]
+"	"                                                                   	{tabs++;}
+[ \t\n]																		{tabs++;}
 
 .|[0-9]*[a-zA-Z][_a-zA-Z0-9]*   											yyerror(yytext);
 
