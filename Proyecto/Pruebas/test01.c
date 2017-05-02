@@ -1,9 +1,10 @@
-int* siguienteArchivo;
-File *khdfkdsj, *asf;
-void include(char*archivoActual,char* archivoTemporal, int ntoken, FILE* nombre){
+
+MazeWalker* walker = (int*)param;
+MazeWalker* walker = (MazeWalker*)param;
+void include(FILE*archivoActual,FILE* archivoTemporal, int ntoken, FILE* nombre){
             printf("Entra al include. \n");
             char *includeArreglado; //El valor del include sin los ""
-            ntoken = nextToken(); //Se obtiene el siguiente token para evaluar
+            ntoken = nextToken() //Se obtiene el siguiente token para evaluar
             /*
                 Debido a que los define son literales
             */
@@ -11,7 +12,7 @@ void include(char*archivoActual,char* archivoTemporal, int ntoken, FILE* nombre)
             if(ntoken == 7){
 
                 numIncludes++;
-                FILE* siguienteArchivo; //Se creará un nuevo archivo
+                FILE* siguienteArchivo //Se creará un nuevo archivo
                 includeArreglado = modificarInclude(yytext); //Se obtiene el include sin ""
                 /*
                     Si el include es diferente al archivo que lo invocó

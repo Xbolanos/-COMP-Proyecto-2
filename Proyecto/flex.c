@@ -12,17 +12,17 @@ extern int yylineno;
 extern int yyleng;
 extern char* yytext;
 extern int linea;
-
+extern char* gramaticas[50000];
 FILE *archivotmp;
 bool preproceso = false;
-
+int banderaSyntaxError = 0; 
 int nextToken(void){
     return yylex();
 }
 
 void yyerror(char *texto){
 	if(strcmp(texto,"\"syntax error\""))
-  		printf(" Syntax Error in Line : %d : %s\n",linea,texto);
+  		printf(" Error de sintaxis en Línea : %d con \"%s\" en %s.\n",linea,yytext,gramaticas);
 	else if(preproceso){
 		fputs(texto,archivotmp);
 		fputs(" ", archivotmp);
@@ -31,6 +31,8 @@ void yyerror(char *texto){
 
         printf("\"%s\", en línea %i.\n",texto,yylineno);
 	}
+	banderaSyntaxError = 1; 
+	yyparse();
        
  
 

@@ -7,19 +7,18 @@
 #include "flex.c"
 #include "preprocess.c"
 #include "myscanner.c" 
-#include "prettyprint.c"
-
+#include "prettyprint2.c"
 extern int  yyparse();
 extern FILE* archivotmp;
 extern int linea;
-extern char* gramaticas[500000];
+extern banderaSyntaxError; 
 
 
 int main(int argc, char *argv[])
 {    /*
         Se valida que se hayan digitado los archivos de entrada en la terminal
     */
-	
+    
     if(argc == 1){
         printf("\n                                    **INSTRUCCIONES**\n\n");
         printf("Para el funcionamiento del programa, este va a funcionar con 3 parámetros en donde el tercero es opcional.\n");
@@ -47,7 +46,7 @@ int main(int argc, char *argv[])
             Se le indica a flex cuál es el archivo actual que se está leyendo
         */
         yyin = archivoEntrada; 
-		if(archivoEntrada && argc>=3){
+        if(archivoEntrada && argc>=3){
             if(argc>=4 && strcmp(argv[3],"S")==0){
                 preproceso=true;
                 memset(gramaticas,0,sizeof(gramaticas));
@@ -58,30 +57,41 @@ int main(int argc, char *argv[])
                 yyin = tmpfile; 
             }
 
-        	//scanner();  	
+            //scanner();    
             //init_table();
-            FILE *tmpPretty = fopen("tmpPretty.c", "w");
-            archivoEntrada  = fopen(argv[1], "r");
-            prettyprintGNU(tmpPretty, gramaticas); 
+            
+            
             linea=1;
             memset(gramaticas,0,sizeof(gramaticas));
             yyparse();
- 
-            prettyprintSelect(atoi(argv[2]));
+            if(banderaSyntaxError == 0){
+                fclose(archivoEntrada);     
+                archivoEntrada  = fopen(argv[1], "r");
+                yyin = archivoEntrada; 
+                FILE *tmpPretty = fopen("tmpPretty.c", "w");
+                printf("este es gramaticas antes de pretty print:\n%s\n", gramaticas);
+                memset(gramaticas,0,sizeof(gramaticas));
+                prettyprintSelect(atoi(argv[2]), tmpPretty);
+                printf("este es gramaticas despues de pretty print:\n%s\n", gramaticas);
+            }
+            
+            //printf("este es gramaticas:\n%s", gramaticas);
+
             fclose(tmpfile);
             fclose(archivoEntrada);
             //fclose(tmpPretty); 
             //remove("tmpfile.c");    
-	    }else{
-	    	printf("El archivo ingresado no existe, verifique que esté bien escrito o bien no ingreso todos los parámetros.\n\n");
+        }else{
+            printf("El archivo ingresado no existe, verifique que esté bien escrito o bien no ingreso todos los parámetros.\n\n");
             printf("                **Para más información presione escriba ./parser y da ENTER.**\n");
-	    }
+        }
 
       
-		
+        
      }
      printf("Termino\n");
 
     return 0; 
 }
+
 

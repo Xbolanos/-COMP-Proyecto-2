@@ -78,7 +78,12 @@ unary_operator
 cast_expression
 	: unary_expression {printf("%d con %s  cast_expression: unary_expression\n",linea, yytext);}
 	| LEFT_PARENTHESIS type_name RIGHT_PARENTHESIS cast_expression {printf("%d con %s  cast_expression: LEFT_PARENTHESIS type_name RIGHT_PARENTHESIS cast_expression\n",linea, yytext);}
+	| LEFT_PARENTHESIS type_identifier RIGHT_PARENTHESIS cast_expression {printf("%d con %s  cast_expression: LEFT_PARENTHESIS type_name RIGHT_PARENTHESIS cast_expression\n",linea, yytext);}
 	;
+type_identifier
+	:IDENTIFIER MUL
+	;
+
 
 multiplicative_expression
 	: cast_expression {printf("%d con %s  multiplicative_expression: cast_expression\n",linea, yytext);}
@@ -245,6 +250,7 @@ specifier_qualifier_list
 	| type_qualifier specifier_qualifier_list {printf("%d con %s  specifier_qualifier_list: type_qualifier specifier_qualifier_list\n",linea,yytext);}
 	| type_qualifier {printf("%d con %s  specifier_qualifier_list: type_qualifier\n",linea, yytext );}
 	;
+
 
 struct_declarator_list
 	: struct_declarator {printf("%d con %s  struct_declarator_list: struct_declarator\n",linea, yytext );}
