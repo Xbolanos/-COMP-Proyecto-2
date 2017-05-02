@@ -1,69 +1,74 @@
-#include "movement.h" void init_maze_mutex  (void ) 
+#include < stdio . h > #include < stdlib . h > #include < unistd . h > #include < string . h > #include "movement.h" #define MAX_BUFFER_SIZE 256 #define MAX_STRING_SIZE 2048 static int keep_printing = 1 ;
+static int read_file  (const char * , char * , int * ) ;
+void * keep_printing_maze  (void * ) ;
+int main  (int argc , char const * argv [ ] ) 
   {
-    pthread_mutexattr_init  (& attr ) ;
-    pthread_mutexattr_setpshared  (& attr , PTHREAD_PROCESS_PRIVATE ) ;
-    pthread_mutex_init  (& mu_maze , & attr ) ;
-  }
-void * check_for_threads  (void * _ ) 
-  {
-    Node * checker = NULL ;
-    pthread_attr_t attr ;
-    pthread_attr_init  (& attr ) ;
-    pthread_attr_setdetachstate  (& attr , PTHREAD_CREATE_DETACHED ) ;
-    while  (! all_threads_death  () ) 
+    int maze_size [ 2 ] = 
       {
-        pthread_mutex_lock  (& mu_threads_list ) ;
-        if  (! checker ) checker = get_head  () ;
-        if  (! checker -> walker . threadWalker ) pthread_create  (& checker -> walker . threadWalker , & attr , move ,  (void * ) & checker -> walker ) ;
-        checker = checker -> next ;
-        pthread_mutex_unlock  (& mu_threads_list ) ;
-      }
-    pthread_attr_destroy  (& attr ) ;
-    return NULL ;
-  }
-void * move  (void * param ) 
-  {
-    int i ;
-    MazeWalker * walker =  (MazeWalker * ) param ;
-    for  (i = 0 ;
-    i < 4 ;
-    i ++ ) walker -> directions [ i ] = 0 ;
-    while  (! colides  (walker -> row , walker -> column ) ) 
+        0 , 0       }
+    ;
+    char string [ MAX_STRING_SIZE ] ;
+    pthread_t manager , printing ;
+    if  (argc < 2 ) 
       {
-        pthread_mutex_lock  (& mu_maze ) ;
-        put_symbol  (walker -> id , walker -> color , walker -> row , walker -> column ) ;
-        check_around  (walker -> directions , walker -> row , walker -> column ) ;
-        pthread_mutex_unlock  (& mu_maze ) ;
-        for  (i = 0 ;
-        i < 4 ;
-        i ++ ) 
-          {
-            if  (walker -> directions [ i ] ) 
-              {
-                if  (walker -> direction != i ) create_walker  (walker -> row , walker -> column , walker -> steps , i ) ;
-                walker -> directions [ i ] = 0 ;
-              }
-                      }
-        switch  (walker -> direction ) 
-          {
-            case UP : walker -> row -- ;
-            break ;
-            case RIGHT : walker -> column ++ ;
-            break ;
-            case DOWN : walker -> row ++ ;
-            break ;
-            case LEFT : walker -> column -- ;
-            break ;
-          }
-        if  (is_exit  (walker -> row , walker -> column ) ) walker -> exited = 1 ;
-        walker -> steps ++ ;
-        sleep  (2 ) ;
+        printf  ("Ingrese un archivo con el cual trabajar.\n" ) ;
+        return 1 ;
       }
-    walker -> finished = 1 ;
-    return NULL ;
+    if  (! read_file  (argv [ 1 ] , string , maze_size ) ) 
+      {
+        printf  ("El archivo ingresado no se pudo abrir o no existe. Intentelo de nuevo.\n" ) ;
+        return 1 ;
+      }
+    init_threads_list_mutex  () ;
+    init_maze_mutex  () ;
+    create_maze  (string , maze_size [ 0 ] , maze_size [ 1 ] ) ;
+    create_walker  (- 1 , 0 , 0 , 2 ) ;
+    pthread_create  (& printing , NULL , keep_printing_maze , NULL ) ;
+    pthread_create  (& manager , NULL , check_for_threads , NULL ) ;
+    pthread_join  (manager , NULL ) ;
+    keep_printing = 0 ;
+    pthread_join  (printing , NULL ) ;
+    print_finished_walkers  () ;
+    destroy_maze_mutex  () ;
+    destroy_threads_list_mutex  () ;
+    delete_maze  () ;
+    delete_walkers  () ;
+    return 0 ;
   }
-void destroy_maze_mutex  (void ) 
+static int read_file  (const char * file_name , char * string , int * maze_size ) 
   {
-    pthread_mutex_destroy  (& mu_maze ) ;
-    pthread_mutexattr_destroy  (& attr ) ;
+    FILE * maze_file = fopen  (file_name , "r" ) ;
+    char buffer [ MAX_BUFFER_SIZE ] ;
+    char * tok ;
+    char * subString ;
+    int i = 0 ;
+    if  (! maze_file ) return 0 ;
+    fgets  (buffer , sizeof  (buffer ) , maze_file ) ;
+    tok = strtok  (buffer , " \n" ) ;
+    while  (tok ) 
+      {
+        maze_size [ i ++ ] = atoi  (tok ) ;
+        tok = strtok  (NULL , " \n" ) ;
+      }
+    printf  ("0" ) ;
+    while  (! feof  (maze_file ) ) 
+      {
+        printf  ("1" ) ;
+        fgets  (buffer , MAX_BUFFER_SIZE , maze_file ) ;
+        printf  ("2" ) ;
+        strncpy  (subString , buffer , maze_size [ 1 ] ) ;
+        printf  ("3" ) ;
+        strcat  (string , subString ) ;
+      }
+    fclose  (maze_file ) ;
+    return 1 ;
+  }
+void * keep_printing_maze  (void * _ ) 
+  {
+    while  (keep_printing ) 
+      {
+        print_maze  () ;
+        sleep  (1 ) ;
+      }
+    return NULL ;
   }
