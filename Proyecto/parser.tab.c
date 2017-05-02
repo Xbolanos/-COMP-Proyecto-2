@@ -457,7 +457,7 @@ union yyalloc
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  88
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  66
+#define YYNNTS  67
 /* YYNRULES -- Number of rules.  */
 #define YYNRULES  231
 /* YYNSTATES -- Number of states.  */
@@ -576,10 +576,10 @@ static const char *const yytname[] =
   "specifier_qualifier_list", "struct_declarator_list",
   "struct_declarator", "enum_specifier", "enumerator_list", "enumerator",
   "type_qualifier", "declarator", "direct_declarator", "pointer",
-  "type_qualifier_list", "parameter_type_list", "parameter_list",
-  "parameter_declaration", "identifier_list", "type_name",
-  "abstract_declarator", "direct_abstract_declarator", "initializer",
-  "initializer_list", "statement", "labeled_statement",
+  "pointer_type", "type_qualifier_list", "parameter_type_list",
+  "parameter_list", "parameter_declaration", "identifier_list",
+  "type_name", "abstract_declarator", "direct_abstract_declarator",
+  "initializer", "initializer_list", "statement", "labeled_statement",
   "compound_statement", "declaration_list", "statement_list",
   "expression_statement", "selection_statement", "iteration_statement",
   "jump_statement", "translation_unit", "external_declaration", "define",
