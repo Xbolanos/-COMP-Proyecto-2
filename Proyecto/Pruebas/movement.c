@@ -37,7 +37,7 @@ void* check_for_threads(void* _)
 void* move(void* param)
 {
   int i;
-  MazeWalker* walker = (MazeWalker*)param;
+  MazeWalker* walker = (MazeWalker*) param;
 
   for(i = 0; i < 4; i++)
     walker->directions[i] = 0;
