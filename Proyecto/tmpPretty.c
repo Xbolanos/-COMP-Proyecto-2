@@ -1,74 +1,94 @@
-#include < stdio . h > #include < stdlib . h > #include < unistd . h > #include < string . h > #include "movement.h" #define MAX_BUFFER_SIZE 256 #define MAX_STRING_SIZE 2048 static int keep_printing = 1 ;
-static int read_file  (const char * , char * , int * ) ;
-void * keep_printing_maze  (void * ) ;
-int main  (int argc , char const * argv [ ] ) 
+#include "maze_walker.h" void init_threads_list_mutex  (void ) 
   {
-    int maze_size [ 2 ] = 
-      {
-        0 , 0       }
-    ;
-    char string [ MAX_STRING_SIZE ] ;
-    pthread_t manager , printing ;
-    if  (argc < 2 ) 
-      {
-        printf  ("Ingrese un archivo con el cual trabajar.\n" ) ;
-        return 1 ;
-      }
-    if  (! read_file  (argv [ 1 ] , string , maze_size ) ) 
-      {
-        printf  ("El archivo ingresado no se pudo abrir o no existe. Intentelo de nuevo.\n" ) ;
-        return 1 ;
-      }
-    init_threads_list_mutex  () ;
-    init_maze_mutex  () ;
-    create_maze  (string , maze_size [ 0 ] , maze_size [ 1 ] ) ;
-    create_walker  (- 1 , 0 , 0 , 2 ) ;
-    pthread_create  (& printing , NULL , keep_printing_maze , NULL ) ;
-    pthread_create  (& manager , NULL , check_for_threads , NULL ) ;
-    pthread_join  (manager , NULL ) ;
-    keep_printing = 0 ;
-    pthread_join  (printing , NULL ) ;
-    print_finished_walkers  () ;
-    destroy_maze_mutex  () ;
-    destroy_threads_list_mutex  () ;
-    delete_maze  () ;
-    delete_walkers  () ;
-    return 0 ;
+    pthread_mutexattr_init  (& attr ) ;
+    pthread_mutexattr_setpshared  (& attr , PTHREAD_PROCESS_PRIVATE ) ;
+    pthread_mutex_init  (& mu_threads_list , & attr ) ;
   }
-static int read_file  (const char * file_name , char * string , int * maze_size ) 
+void create_walker  (int row , int column , int steps , int direction ) 
   {
-    FILE * maze_file = fopen  (file_name , "r" ) ;
-    char buffer [ MAX_BUFFER_SIZE ] ;
-    char * tok ;
-    char * subString ;
-    int i = 0 ;
-    if  (! maze_file ) return 0 ;
-    fgets  (buffer , sizeof  (buffer ) , maze_file ) ;
-    tok = strtok  (buffer , " \n" ) ;
-    while  (tok ) 
+    int i ;
+    MazeWalker new_walker ;
+    new_walker . row = row ;
+    new_walker . column = column ;
+    new_walker . steps = ++ steps ;
+    new_walker . color = color_count ++ % 8 ;
+    new_walker . exited = 0 ;
+    new_walker . finished = 0 ;
+    new_walker . direction = direction ;
+    new_walker . threadWalker = NULL ;
+    switch  (new_walker . direction ) 
       {
-        maze_size [ i ++ ] = atoi  (tok ) ;
-        tok = strtok  (NULL , " \n" ) ;
+        case UP : new_walker . row -- ;
+        break ;
+        case RIGHT : new_walker . column ++ ;
+        break ;
+        case DOWN : new_walker . row ++ ;
+        break ;
+        case LEFT : new_walker . column -- ;
+        break ;
       }
-    printf  ("0" ) ;
-    while  (! feof  (maze_file ) ) 
+    for  (i = 0 ;
+    i < 2 ;
+    i ++ ) 
       {
-        printf  ("1" ) ;
-        fgets  (buffer , MAX_BUFFER_SIZE , maze_file ) ;
-        printf  ("2" ) ;
-        strncpy  (subString , buffer , maze_size [ 1 ] ) ;
-        printf  ("3" ) ;
-        strcat  (string , subString ) ;
-      }
-    fclose  (maze_file ) ;
-    return 1 ;
-  }
-void * keep_printing_maze  (void * _ ) 
-  {
-    while  (keep_printing ) 
-      {
-        print_maze  () ;
+        if  (colides  (new_walker . row , new_walker . column ) ) return ;
         sleep  (1 ) ;
       }
-    return NULL ;
+    pthread_mutex_lock  (& mu_threads_list ) ;
+    new_walker . id = thread_count ++ ;
+    add_walker  (new_walker ) ;
+    pthread_mutex_unlock  (& mu_threads_list ) ;
+  }
+static void add_walker  (MazeWalker walker ) 
+  {
+    if  (! head ) 
+      {
+        head =  (Node * ) malloc  (sizeof  (Node ) ) ;
+        head -> walker = walker ;
+        head -> next = NULL ;
+        current = head ;
+        return ;
+      }
+    current -> next =  (Node * ) malloc  (sizeof  (Node ) ) ;
+    current -> next -> walker = walker ;
+    current -> next -> next = NULL ;
+    current = current -> next ;
+  }
+int all_threads_death  (void ) 
+  {
+    Node * temp = head ;
+    while  (temp ) 
+      {
+        if  (! temp -> walker . finished ) return 0 ;
+        temp = temp -> next ;
+      }
+    return 1 ;
+  }
+Node * get_head  (void ) 
+  {
+    return head ;
+  }
+void print_finished_walkers  (void ) 
+  {
+    current = head ;
+    while  (current ) 
+      {
+        if  (current -> walker . exited ) printf  ("El caminante %d llego a la salida ubicada en la fila %d columna %d en %d pasos.\n" , current -> walker . id , current -> walker . row , current -> walker . column , current -> walker . steps ) ;
+        current = current -> next ;
+      }
+    printf  ("\n\n" ) ;
+  }
+void delete_walkers  (void ) 
+  {
+    while  (head ) 
+      {
+        current = head ;
+        head = head -> next ;
+        free  (current ) ;
+      }
+      }
+void destroy_threads_list_mutex  (void ) 
+  {
+    pthread_mutex_destroy  (& mu_threads_list ) ;
+    pthread_mutexattr_destroy  (& attr ) ;
   }
