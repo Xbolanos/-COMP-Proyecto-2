@@ -2,3 +2,5 @@
 *.o
 
 Proyecto/myscanner
+
+*.DS_Store
