@@ -1,8 +1,4 @@
-#include "prueba1.h"
-
-
-int funcion()
-{
-   printf("Esto es una función");
-   return 0;
-}
+t*w,*z;
+z=u->c,q(z),u->b=z->b*10,
+w=u->c=f(),w->a=1,w->c=z->
+c;

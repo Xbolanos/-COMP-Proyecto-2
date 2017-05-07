@@ -42,11 +42,12 @@ postfix_expression
 	: primary_expression {printf("%d con %s  postfix_expression: primary_expression\n",linea, gramaticas );}
 	| pointer primary_expression {printf("%d con %s  postfix_expression: pointer primary_expression\n",linea, gramaticas);}
 	| primary_expression pointer primary_expression {printf("%d con %s  postfix_expression: primary_expression pointer primary_expression \n",linea, gramaticas );}
+	| primary_expression pointer EXCLAMATION primary_expression {printf("%d con %s  postfix_expression: primary_expression pointer primary_expression \n",linea, gramaticas );}
 	| postfix_expression LEFT_SBRACKET expression RIGHT_SBRACKET {printf("%d con %s  postfix_expression: postfix_expression RIGHT_SBRACKET expression LEFT_SBRACKET\n",linea, gramaticas);}
 	| LEFT_BRACKET RIGHT_BRACKET {printf("%d con %s  postfix_expression: postfix_expression RIGHT_SBRACKET expression LEFT_SBRACKET\n",linea, gramaticas);}
 	| postfix_expression LEFT_PARENTHESIS RIGHT_PARENTHESIS {printf("%d con %s  postfix_expression: postfix_expression LEFT_PARENTHESIS RIGHT_PARENTHESIS\n",linea,gramaticas);}
 	| postfix_expression LEFT_PARENTHESIS argument_expression_list RIGHT_PARENTHESIS {printf("%d con %s  postfix_expression: postfix_expression RIGHT_PARENTHESIS argument_expression_list LEFT_PARENTHESIS\n",linea, gramaticas);}
-	
+	| postfix_expression primary_expression {printf("%d con %s  postfix_expression: postfix_expression DOT IDENTIFIER\n",linea, gramaticas);}
 	| postfix_expression DOT IDENTIFIER {printf("%d con %s  postfix_expression: postfix_expression DOT IDENTIFIER\n",linea, gramaticas);}
 	| postfix_expression PTR_OP IDENTIFIER {printf("%d con %s  postfix_expression: postfix_expression PTR_OP IDENTIFIER\n",linea, gramaticas);}
 	| postfix_expression INC_OP {printf("%d con %s  postfix_expression: postfix_expression INC_OP\n",linea, gramaticas );}
@@ -251,6 +252,7 @@ struct_declaration_list
 
 struct_declaration
 	: specifier_qualifier_list struct_declarator_list SEMICOLON {printf("%d con %s  struct_declaration: specifier_qualifier_list struct_declarator_list SEMICOLON\n",linea, gramaticas );memset(gramaticas,0,sizeof(gramaticas));}
+	| IDENTIFIER struct_declarator_list SEMICOLON
 	;
 
 specifier_qualifier_list
@@ -425,6 +427,7 @@ declaration_list
 
 statement_list
 	: statement {printf("%d con %s  statement_list: statement\n",linea, gramaticas );}
+	| statement DEFINE define {lineaactual=linea; printf("%d con %s  external_declaration: DEFINE define\n",linea, gramaticas);}
 	| statement_list statement {printf("%d con %s  statement_list: statement_list statement\n",linea, gramaticas);}
 	| statement_list declaration_list
 	;
@@ -472,6 +475,9 @@ external_declaration
 	| INCLUDE LESS IDENTIFIER DOT IDENTIFIER GREATER{printf("%d con %s  external_declaration: INCLUDE LITERALn\n",linea, gramaticas);}
 	| INCLUDE LESS 	IDENTIFIER DIV IDENTIFIER DOT IDENTIFIER GREATER{printf("%d con %s  external_declaration: INCLUDE LITERALn\n",linea, gramaticas);}
 	| '\n'
+	| SEMICOLON
+	| compound_statement
+
 	;
 define
 	: '\n' {printf("Sigue");}
@@ -567,6 +573,7 @@ function_definition
 	| declaration_specifiers declarator compound_statement {printf("%d con %s  function_definition: declaration_specifiers declarator compound_statement \n",linea, gramaticas);}
 	| declarator declaration_list compound_statement {printf("%d con %s  function_definition: declarator declaration_list compound_statement\n",linea, gramaticas );}
 	| declarator compound_statement {printf("%d con %s  function_definition: declarator compound_statement\n",linea,gramaticas);}
+	| declarator declaration_list compound_statement function_definition
 	;
 
 %%

@@ -1,28 +1,26 @@
-#define	DIT	(
-#define	DAH	)
-#define	__DAH	++
-#define DITDAH	*
-#define	DAHDIT	for
-#define	DIT_DAH	malloc
-#define DAH_DIT	gets
-#define	_DAHDIT	char
-_DAHDIT _DAH_[]="ETIANMSURWDKGOHVFaLaPJBXCYZQb54a3d2f16g7c8a90l?e'b.s;i,d:"
-;main			DIT			DAH{_DAHDIT
-DITDAH			_DIT,DITDAH		DAH_,DITDAH DIT_,
-DITDAH			_DIT_,DITDAH		DIT_DAH DIT
-DAH,DITDAH		DAH_DIT DIT		DAH;DAHDIT
-DIT _DIT=DIT_DAH	DIT 81			DAH,DIT_=_DIT
-__DAH;_DIT==DAH_DIT	DIT _DIT		DAH;__DIT
-DIT'\n'DAH DAH		DAHDIT DIT		DAH_=_DIT;DITDAH
-DAH_;__DIT		DIT			DITDAH
-_DIT_?_DAH DIT		DITDAH			DIT_ DAH:'?'DAH,__DIT
-DIT' 'DAH,DAH_ __DAH	DAH DAHDIT		DIT
-DITDAH			DIT_=2,_DIT_=_DAH_;	DITDAH _DIT_&&DIT
-DITDAH _DIT_!=DIT	DITDAH DAH_>='a'?	DITDAH
-DAH_&223:DITDAH		DAH_ DAH DAH;		DIT
-DITDAH			DIT_ DAH __DAH,_DIT_	__DAH DAH
-DITDAH DIT_+=		DIT DITDAH _DIT_>='a'?	DITDAH _DIT_-'a':0
-DAH;}_DAH DIT DIT_	DAH{			__DIT DIT
-DIT_>3?_DAH		DIT			 DIT_>>1 DAH:'\0'DAH;return
-DIT_&1?'-':'.';}__DIT DIT			DIT_ DAH _DAHDIT
-DIT_;{DIT void DAH write DIT			1,&DIT_,1 DAH;}
+typedef struct n{int a:3,
+b:29;struct n*c;}t;t*
+f();r(){}m(u)t*u;{t*w,*z;
+z=u->c,q(z),u->b=z->b*10,
+w=u->c=f(),w->a=1,w->c=z->
+c;}t*k;g(u)t*u;{t*z,*v,*p,
+*x;z=u->c,q(z),u->b=z->b,v
+=z->c,z->a=2,x=z->c=f(),x
+->a=3,x->b=2,p=x->c=f(),p
+->c=f(),p->c->a=1,p->c->c=
+v;}int i;h(u)t*u;{t*z,*v,*
+w;int c,e;z=u->c,v=z->c,q(
+v),c=u->b,e=v->b,u->b=z->b
+,z->a=3,z->b=c+1,e+9>=c&&(
+q(z),e=z->b,u->b+=e/c,w=f(
+),w->b=e%c,w->c=z->c,u->c=
+w);}int(*y[4])()={r,m,g,h};
+char *sbrk();main(){t*e,*p,*o;
+o=f(),o->c=o,o->b=1,e=f(),
+e->a=2,p=e->c=f(),p->b=2,
+p->c=o,q(e),e=e->c,(void)write
+(1,"2.",2);for(;;e=e->c){q(e),
+e->b=write(1,&e->b["0123456789"],
+1);}}t*f(){return i||(i=1000,
+k=(t*)sbrk(i*sizeof(t))),k+--i;
+}q(p)t*p;{(*y[p->a])(p);}
