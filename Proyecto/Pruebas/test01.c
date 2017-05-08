@@ -1,26 +1,105 @@
-typedef struct n{int a:3,
-b:29;struct n*c;}t;t*
-f();r(){}m(u)t*u;{t*w,*z;
-z=u->c,q(z),u->b=z->b*10,
-w=u->c=f(),w->a=1,w->c=z->
-c;}t*k;g(u)t*u;{t*z,*v,*p,
-*x;z=u->c,q(z),u->b=z->b,v
-=z->c,z->a=2,x=z->c=f(),x
-->a=3,x->b=2,p=x->c=f(),p
-->c=f(),p->c->a=1,p->c->c=
-v;}int i;h(u)t*u;{t*z,*v,*
-w;int c,e;z=u->c,v=z->c,q(
-v),c=u->b,e=v->b,u->b=z->b
-,z->a=3,z->b=c+1,e+9>=c&&(
-q(z),e=z->b,u->b+=e/c,w=f(
-),w->b=e%c,w->c=z->c,u->c=
-w);}int(*y[4])()={r,m,g,h};
-char *sbrk();main(){t*e,*p,*o;
-o=f(),o->c=o,o->b=1,e=f(),
-e->a=2,p=e->c=f(),p->b=2,
-p->c=o,q(e),e=e->c,(void)write
-(1,"2.",2);for(;;e=e->c){q(e),
-e->b=write(1,&e->b["0123456789"],
-1);}}t*f(){return i||(i=1000,
-k=(t*)sbrk(i*sizeof(t))),k+--i;
-}q(p)t*p;{(*y[p->a])(p);}
+char*lie;
+
+    double time, me= !0XFACE,
+
+    not; int rested,   get, out;
+
+    main(ly, die) char ly, **die ;{
+
+        signed char lotte,
+
+
+dear; (char)lotte--;
+
+    for(get= !me;; not){
+
+    1 -  out & out ;lie;{
+
+    char lotte, my= dear,
+
+    **let= !!me *!not+ ++die;
+
+        (char*)(lie=
+
+
+"The gloves are OFF this time, I detest you, snot\n\0sed GEEK!");
+
+    do {not= *lie++ & 0xF00L* !me;
+
+    #define love (char*)lie -
+
+    love 1 *!(not= atoi(let
+
+    [get -me?
+
+        (char)lotte-
+
+
+(char)lotte: my- *love -
+    
+    'I'  -  *love -  'U' -
+
+    'I'  -  (long)  - 4 - 'U' ])- !!
+    
+    (time  =out=  'a'));} while( my - dear
+
+    && 'I'-1l  -get-  'a'); break;}}
+
+        (char)*lie++;
+
+(char)*lie++ , (char)*lie++; hell:0, (char)*lie;
+    get *out* (short)ly   -0-'R'-  get- 'a'^rested;
+
+    do {auto*eroticism,
+
+    that; puts(*( out
+
+        - 'c'
+    
+-('P'-'S') +die+ -2 ));}while(!"you're at it");
+
+
+for (*((char*)&lotte)^=
+
+    (char)lotte; (love ly) [(char)++lotte+
+
+    !!0xBABE];){ if ('I' -lie[ 2 +(char)lotte]){ 'I'-1l ***die; }
+
+    else{ if ('I' * get *out* ('I'-1l **die[ 2 ])) *((char*)&lotte) -=
+
+    '4' - ('I'-1l); not; for(get=!
+
+
+get; !out; (char)*lie  &  0xD0- !not) return!!
+
+    (char)lotte;}
+
+
+(char)lotte;
+
+    do{ not* putchar(lie [out
+
+    *!not* !!me +(char)lotte]);
+
+    not; for(;!'a';);}while(
+
+        love (char*)lie);{
+
+
+register this; switch( (char)lie
+
+    [(char)lotte] -1 *!out) {
+
+    char*les, get= 0xFF, my; case' ':
+
+    *((char*)&lotte) += 15; !not +(char)*lie*'s';
+
+    this +1+ not; default: 0xF +(char*)lie;}}}
+
+    get - !out;
+
+    if (not--)
+
+    goto hell;
+
+        exit( (char)lotte);}
