@@ -1,5 +1,5 @@
 #define n ((e[++a]-42)/9-f[d+1])?
-#define o printf("%c",c[" 01./:;|\\"]);
+#define o printf("%c",c[" 01./:;|\\" ]);
 
 char e[]="**3<HRZcir+3@OXakt;=GOXds*\?HRZcir*7HNZ`i19JS\\p*H[m1:CJSz*>H[`mr25\
 \?Hx,P,B2Gs-KTfzRdv1SeyCR-ISeu.<Ev+9+P,z,4PfzIdvO2*HRZcir6GPis=MU*3HRZcir*HZi\
