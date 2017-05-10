@@ -1,94 +1,81 @@
-#include "maze_walker.h" void init_threads_list_mutex  (void ) 
+char * lie ;
+double time , me = ! 0XFACE , not ;
+int rested , get , out ;
+main  (ly , die ) char ly , * * die ;
+
   {
-    pthread_mutexattr_init  (& attr ) ;
-    pthread_mutexattr_setpshared  (& attr , PTHREAD_PROCESS_PRIVATE ) ;
-    pthread_mutex_init  (& mu_threads_list , & attr ) ;
-  }
-void create_walker  (int row , int column , int steps , int direction ) 
-  {
-    int i ;
-    MazeWalker new_walker ;
-    new_walker . row = row ;
-    new_walker . column = column ;
-    new_walker . steps = ++ steps ;
-    new_walker . color = color_count ++ % 8 ;
-    new_walker . exited = 0 ;
-    new_walker . finished = 0 ;
-    new_walker . direction = direction ;
-    new_walker . threadWalker = NULL ;
-    switch  (new_walker . direction ) 
+    signed char lotte , dear ;
+ (char ) lotte -- ;
+    for  (get = ! me ;
+;
+    not ) 
       {
-        case UP : new_walker . row -- ;
-        break ;
-        case RIGHT : new_walker . column ++ ;
-        break ;
-        case DOWN : new_walker . row ++ ;
-        break ;
-        case LEFT : new_walker . column -- ;
-        break ;
-      }
-    for  (i = 0 ;
-    i < 2 ;
-    i ++ ) 
+        1 - out & out ;
+        lie ;
+
+          {
+            char lotte , my = dear , * * let = ! ! me * ! not + ++ die ;
+ (char * )  (lie = "The gloves are OFF this time, I detest you, snot\n\0sed GEEK!" ) ;
+            do 
+              {
+                not = * lie ++ & 0xF00L * ! me ;
+                #define love  (char * ) lie - 
+ love 1 * !  (not = atoi  (let [ get - me ?  (char ) lotte -  (char ) lotte : my - * love - 'I' - * love - 'U' - 'I' -  (long ) - 4 - 'U' ] ) - ! !  (time = out = 'a' ) ) ;
+              }
+            while  (my - dear && 'I' - 1l - get - 'a' ) ;
+            break ;
+          }
+              }
+     (char ) * lie ++ ;
+ (char ) * lie ++ ,  (char ) * lie ++ ;
+    hell : 0 ,  (char ) * lie ;
+    get * out *  (short ) ly - 0 - 'R' - get - 'a' ^ rested ;
+    do 
       {
-        if  (colides  (new_walker . row , new_walker . column ) ) return ;
-        sleep  (1 ) ;
+        auto * eroticism , that ;
+        puts  (*  (out - 'c' -  ('P' - 'S' ) + die + - 2 ) ) ;
       }
-    pthread_mutex_lock  (& mu_threads_list ) ;
-    new_walker . id = thread_count ++ ;
-    add_walker  (new_walker ) ;
-    pthread_mutex_unlock  (& mu_threads_list ) ;
-  }
-static void add_walker  (MazeWalker walker ) 
-  {
-    if  (! head ) 
+    while  (! "you're at it" ) ;
+    for  (*  ( (char * ) & lotte ) ^=  (char ) lotte ;
+ (love ly ) [  (char ) ++ lotte + ! ! 0xBABE ] ;
+    ) 
       {
-        head =  (Node * ) malloc  (sizeof  (Node ) ) ;
-        head -> walker = walker ;
-        head -> next = NULL ;
-        current = head ;
-        return ;
-      }
-    current -> next =  (Node * ) malloc  (sizeof  (Node ) ) ;
-    current -> next -> walker = walker ;
-    current -> next -> next = NULL ;
-    current = current -> next ;
-  }
-int all_threads_death  (void ) 
-  {
-    Node * temp = head ;
-    while  (temp ) 
-      {
-        if  (! temp -> walker . finished ) return 0 ;
-        temp = temp -> next ;
-      }
-    return 1 ;
-  }
-Node * get_head  (void ) 
-  {
-    return head ;
-  }
-void print_finished_walkers  (void ) 
-  {
-    current = head ;
-    while  (current ) 
-      {
-        if  (current -> walker . exited ) printf  ("El caminante %d llego a la salida ubicada en la fila %d columna %d en %d pasos.\n" , current -> walker . id , current -> walker . row , current -> walker . column , current -> walker . steps ) ;
-        current = current -> next ;
-      }
-    printf  ("\n\n" ) ;
-  }
-void delete_walkers  (void ) 
-  {
-    while  (head ) 
-      {
-        current = head ;
-        head = head -> next ;
-        free  (current ) ;
-      }
-      }
-void destroy_threads_list_mutex  (void ) 
-  {
-    pthread_mutex_destroy  (& mu_threads_list ) ;
-    pthread_mutexattr_destroy  (& attr ) ;
+        if  ('I' - lie [ 2 +  (char ) lotte ] ) 
+          {
+            'I' - 1l * * * die ;
+          }
+        else 
+          {
+            if  ('I' * get * out *  ('I' - 1l * * die [ 2 ] ) ) *  ( (char * ) & lotte ) -= '4' -  ('I' - 1l ) ;
+            not ;
+            for  (get = ! get ;
+            ! out ;
+ (char ) * lie & 0xD0 - ! not ) return ! !  (char ) lotte ;
+          }
+         (char ) lotte ;
+        do 
+          {
+            not * putchar  (lie [ out * ! not * ! ! me +  (char ) lotte ] ) ;
+            not ;
+            for  (;
+            ! 'a' ;
+            ) ;
+          }
+        while  (love  (char * ) lie ) ;
+
+          {
+            register this ;
+            switch  ( (char ) lie [  (char ) lotte ] - 1 * ! out ) 
+              {
+                char * les , get = 0xFF , my ;
+                case ' ' : *  ( (char * ) & lotte ) += 15 ;
+                ! not +  (char ) * lie * 's' ;
+                this + 1 + not ;
+                default : 0xF +  (char * ) lie ;
+              }
+                      }
+              }
+    get - ! out ;
+    if  (not -- ) goto hell ;
+    exit  ( (char ) lotte ) ;
   }
